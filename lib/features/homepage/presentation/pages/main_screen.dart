@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:receipt_flow/core/util/app_strings.dart';
+import 'package:receipt_flow/features/expanse/presentation/pages/expanse_page.dart';
 import 'package:receipt_flow/features/homepage/presentation/pages/homepage.dart';
+import 'package:receipt_flow/features/homepage/presentation/pages/test.dart';
+import 'package:receipt_flow/features/income/presentation/income_page.dart';
+import 'package:receipt_flow/features/settings/presentation/pages/settings_page.dart';
 
 import '../../../../core/util/app_colors.dart';
 import '../../../../core/util/app_images.dart';
@@ -14,10 +18,10 @@ class MainScreen extends StatelessWidget {
 
   final List<Widget> _pages = <Widget>[
     Homepage(),
-    Homepage(),
-    Homepage(),
-    Homepage(),
-    Homepage(),
+    const IncomePage(),
+    TestWidget(),
+    const ExpansePage(),
+    const SettingsPage(),
   ];
 
   @override
