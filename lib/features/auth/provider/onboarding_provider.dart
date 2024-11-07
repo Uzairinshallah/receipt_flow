@@ -7,14 +7,10 @@ import '../../../core/mixins/easy_loading_mixin.dart';
 class OnboardingProvider with ChangeNotifier, EasyLoadingMixin {
   final pageController = PageController();
   int currentPage = 0;
-  int groupValue = 0; // Default selected option index
+  int groupValue = 0;
 
   String? selectedDrocr;
 
-  void onSpokenLanguageSelect(String? drocr) {
-    selectedDrocr = drocr;
-    notifyListeners();
-  }
 
   void onPageChanged(int page) {
     pageController.jumpToPage(page);
@@ -44,19 +40,12 @@ class OnboardingProvider with ChangeNotifier, EasyLoadingMixin {
   String? selectedSoftware;
   bool? haveAccountant;
 
-  void onCourseSelected(String? software) {
-    selectedSoftware = software;
-    notifyListeners();
-  }
 
-  void onCountrySelected(bool? val) {
-    haveAccountant = val;
-    notifyListeners();
-  }
+
 
   EmployeeCountEnum? selectedEmployeeCount;
 
-  void onCourseLevelSelected(EmployeeCountEnum value) {
+  void onEmployeeCountSelected(EmployeeCountEnum value) {
     selectedEmployeeCount = value;
     notifyListeners();
   }

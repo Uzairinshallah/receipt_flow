@@ -58,10 +58,10 @@ class UserRepositoryImpl implements UserRepository {
           debugPrint('Upload failed: ${response.statusCode} - ${response.data}');
         }
       } catch (e) {
-        print('Error occurred during upload: $e');
+        debugPrint('Error occurred during upload: $e');
       }
     } else {
-      print('File does not exist');
+      debugPrint('File does not exist');
     }
   }
 
