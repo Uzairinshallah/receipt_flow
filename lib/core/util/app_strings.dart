@@ -27,5 +27,9 @@ abstract class  LocaleKeys {
   static const expense = "Expense";
   static const setting = "Setting";
   static const toReview = "To Review";
+  static const incomeModule = "Income Module\nComing Soon";
+  static const settingsModule = "Settings Module\nComing Soon";
+  static const expanseModule = "Expanse Module\nComing Soon";
+
 
 }
