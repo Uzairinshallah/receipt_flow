@@ -20,7 +20,6 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
-
   List<Widget> pages = [];
 
   @override
@@ -32,11 +31,9 @@ class _OnboardingPageState extends State<OnboardingPage> {
       DrocrWidget(),
       AccountingSoftwareWidget(),
       const OnboardingFinalWidget()
-
     ];
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +43,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
         builder: (context, provider, child) {
           return Scaffold(
             body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: Utils.horizontalPadding(), vertical: 50.h),
+              padding: EdgeInsets.symmetric(
+                  horizontal: Utils.horizontalPadding(), vertical: 50.h),
               child: Column(
                 children: [
                   20.verticalSpace,
@@ -61,8 +59,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                       children: pages,
                     ),
                   ),
-                  _buildLinearProgressIndicator(provider), // Line indicator at the top
-
+                  _buildLinearProgressIndicator(
+                      provider), // Line indicator at the top
                 ],
               ),
             ),
@@ -70,14 +68,6 @@ class _OnboardingPageState extends State<OnboardingPage> {
         },
       ),
     );
-
-
-
-
-
-
-
-
   }
 
   Widget _buildLinearProgressIndicator(OnboardingProvider provider) {
@@ -86,15 +76,17 @@ class _OnboardingPageState extends State<OnboardingPage> {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            (provider.currentPage == 0) ? const SizedBox() : InkWell(
-                onTap: () {
-                  if (provider.currentPage == 0) {
-                    Navigator.of(context).pop();
-                    return;
-                  }
-                  provider.navToPreviousPage();
-                },
-                child: const Icon(Icons.arrow_back)),
+            (provider.currentPage == 0)
+                ? const SizedBox()
+                : InkWell(
+                    onTap: () {
+                      if (provider.currentPage == 0) {
+                        Navigator.of(context).pop();
+                        return;
+                      }
+                      provider.navToPreviousPage();
+                    },
+                    child: const Icon(Icons.arrow_back)),
             15.horizontalSpace,
             Expanded(
               child: SizedBox(
@@ -115,12 +107,4 @@ class _OnboardingPageState extends State<OnboardingPage> {
       },
     );
   }
-
-
 }
-
-
-
-
-
-

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:receipt_flow/core/util/app_colors.dart';
+import 'package:receipt_flow/core/util/app_strings.dart';
 import 'package:receipt_flow/features/auth/provider/onboarding_provider.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_text.dart';
 import '../../../core/enums/employee_count_enum.dart';
@@ -24,21 +25,21 @@ class AboutCompanyWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                text: "About your company",
+                text: LocaleKeys.aboutYourCompany,
                 size: 30.w,
                 fontWeight: FontWeight.w600,
               ),
               20.verticalSpace,
               CustomText(
-                text: "Tell us more so that we can cater your experience",
-                size: 20.w,
-                fontWeight: FontWeight.w600,
+                text: LocaleKeys.tellUsMoreSoThatWeCanCaterYourExperience,
+                size: 18.w,
+                textAlign: TextAlign.center,
               ),
               20.verticalSpace,
               CustomText(
-                text: "How many employees do you have?",
-                size: 20.w,
-                fontWeight: FontWeight.w600,
+                text: LocaleKeys.howManyEmployeesDoYouHave,
+                textAlign: TextAlign.center,
+                size: 18.w,
               ),
               10.verticalSpace,
 
@@ -54,21 +55,30 @@ class AboutCompanyWidget extends StatelessWidget {
                   itemCount: employeeCounts.length,
                   itemBuilder: (context, index) {
                     final employeeCount = employeeCounts[index];
-                    return Card(
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.r),
-                        side: BorderSide(
-                          color: AppColors.lightTextBlack.withOpacity(.6),
-                          width: 1,
-                        ),
-                      ),
-                      child: SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            employeeCount.label,
-                            style: const TextStyle(fontSize: 16),
+                    return Theme(
+                      data: Utils.getSplash(context),
+                      child: InkWell(
+                        onTap: () {
+                          provider.onEmployeeCountSelected(employeeCount);
+                        },
+                        child: Card(
+                          elevation: 2,
+                          color: (provider.selectedEmployeeCount?.label == employeeCount.label) ? AppColors.primaryLight : Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.r),
+                            side: BorderSide(
+                              color: (provider.selectedEmployeeCount?.label == employeeCount.label) ? AppColors.primaryColor :AppColors.lightTextBlack.withOpacity(.3),
+                              width: 2,
+                            ),
+                          ),
+                          child: SizedBox(
+                            height: 50,
+                            child: Center(
+                              child: Text(
+                                employeeCount.label,
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
                           ),
                         ),
                       ),

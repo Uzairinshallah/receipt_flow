@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/util/utils.dart';
 import '../../model/receipt_model.dart';
 import '../domain/receipt_impl.dart';
 
@@ -12,10 +13,8 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.baseUrl});
 
   @override
-  Future<void> uploadReceipt(File receiptImage) async {
+  Future<ReceiptModel?> uploadReceipt(String receiptImage) async {
     var dio = Dio();
-    print("receiptImage.path.split(Platform.pathSeparator).last");
-    print(receiptImage.path.split(Platform.pathSeparator).last);
     dio.interceptors.add(LogInterceptor(
       request: true,
       requestHeader: true,
@@ -28,18 +27,18 @@ class UserRepositoryImpl implements UserRepository {
 
     var formData = FormData();
 
-    if (receiptImage.existsSync()) {
+    // if (receiptImage.existsSync()) {
       formData.files.add(MapEntry(
         'receipt',
-        MultipartFile.fromFileSync(receiptImage.path,
-            filename: receiptImage.path.split(Platform.pathSeparator).last,
+        MultipartFile.fromFileSync(receiptImage,
+            filename: receiptImage.split(Platform.pathSeparator).last,
             contentType: DioMediaType("image","jpg")
         ),
       ));
-
+    ReceiptModel? receipt;
       try {
         Response response = await dio.post(
-          'https://expressjs-hufk.onrender.com/parse',
+          baseUrl,
           data: formData,
         );
 
@@ -49,20 +48,24 @@ class UserRepositoryImpl implements UserRepository {
             responseData = jsonDecode(responseData);
           }
 
-          ReceiptModel receipt = ReceiptModel.fromJson(responseData);
+          receipt = ReceiptModel.fromJson(responseData);
+          Utils.showToast("Upload successful");
 
           debugPrint('Upload successful');
           debugPrint('Receipt ID: ${response.data}');
           debugPrint('Receipt URL: ${receipt.receipt?.currency}');
         } else {
+          Utils.showToast("Upload failed: ${response.statusCode} - ${response.data}");
           debugPrint('Upload failed: ${response.statusCode} - ${response.data}');
         }
       } catch (e) {
-        debugPrint('Error occurred during upload: $e');
+        Utils.showToast("Error occurred during upload ");
+
       }
-    } else {
-      debugPrint('File does not exist');
-    }
+      return receipt;
+    // } else {
+    //   debugPrint('File does not exist');
+    // }
   }
 
 }

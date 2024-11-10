@@ -28,22 +28,6 @@ class LandingPage extends StatelessWidget {
             children: [
               80.verticalSpace,
               ImageContainer(containerHeight: Utils.screenFullHeight(context) * .6, imageSize: 100,),
-              // Container(
-              //   width: double.infinity,
-              //   height: Utils.screenFullHeight(context) * .6,
-              //   color: AppColors.containerBg,
-              //   child: Column(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       GetPngImage(
-              //         imagePath: AppImages.imagePreview,
-              //         width: 100.w,
-              //         height: 100.h,
-              //         imageCol: AppColors.greyBg,
-              //       ),
-              //     ],
-              //   ),
-              // ),
               40.verticalSpace,
               CustomButton(
                 text: LocaleKeys.startAFreeTrail,

@@ -8,7 +8,8 @@ import '../../../custom_widgets/custom_png_image.dart';
 import '../../../custom_widgets/custom_text.dart';
 
 class ImageTabWidget extends StatelessWidget {
-  const ImageTabWidget({super.key});
+  final String? imageUrl;
+  const ImageTabWidget({super.key, this.imageUrl,});
 
   @override
   Widget build(BuildContext context) {
@@ -21,34 +22,33 @@ class ImageTabWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                GetPngImage(
-                  imagePath: AppImages.file,
-                  height: 150.h,
-                  imageCol: AppColors.greyBg.withOpacity(.3),
-                ),
-                20.verticalSpace,
-                const CustomText(
-                  text: "No Items Detected",
-                  color: AppColors.lightTextBlack,
-                ),
-                20.verticalSpace,
+
                 Container(
+                  height: 400.h,
+                  width: 300.w,
                   decoration: BoxDecoration(
+                    // shape: BoxShape.circle,
+                    borderRadius: BorderRadius.circular(10.w,),
                     border: Border.all(
-                      color: AppColors.secondaryColor.withOpacity(.3),
+                      color: AppColors.secondaryColor,
                       width: 2,
                     ),
-                    borderRadius: BorderRadius.circular(4.r),
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-                    child: const CustomText(
-                      text: "Add Item",
-                      color: AppColors.secondaryColor,
-                      fontWeight: FontWeight.w600,
+                  child:  ClipRRect(
+                    child: Image(image:
+                    (imageUrl != null) ?
+                    NetworkImage(imageUrl!)
+                            : const AssetImage(AppImages.imagePreview),
+                      fit: (imageUrl != null) ? BoxFit.fill : BoxFit.contain,
                     ),
                   ),
                 ),
+                20.verticalSpace,
+                (imageUrl != null) ? const CustomText(
+                  text: "No Image Found",
+                  color: AppColors.lightTextBlack,
+                ) : const SizedBox(),
+                20.verticalSpace,
               ],
             ),
           ),

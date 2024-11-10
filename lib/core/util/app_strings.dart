@@ -20,7 +20,7 @@ abstract class  LocaleKeys {
   static const uploadingItem = "Uploading Item";
   static const extractingItem = "Extracting Item";
   static const noRecentFiles = "No Recent Files";
-  static const scanNewDocs = "scanNewDocs";
+  static const scanNewDocs = "Scan New Docs";
   static const home = "Home";
   static const income = "Income";
   static const scan = "Scan";
@@ -30,6 +30,31 @@ abstract class  LocaleKeys {
   static const incomeModule = "Income Module\nComing Soon";
   static const settingsModule = "Settings Module\nComing Soon";
   static const expanseModule = "Expanse Module\nComing Soon";
+  static const ocrType = "OCR Type";
+  static const subTotal = "SubTotal";
+  static const notFound = "Not Found";
+  static const imageSuccessfullySelected = "Image successfully selected";
+  static const imageNotSelected = "Image not selected";
+  static const imageSelectionPage = "Image Selection Page";
+  static const scanImage = "Scan Image";
+  static const uploadFromGallery = "Upload from Gallery";
+  static const croppedImagePath = "Cropped image path";
+  static const uploadReceipt = "Upload Receipt";
+  static const pleaseSelectAnImageFirst = "Please select an image first";
+  static const aboutYourCompany = "About your company";
+  static const tellUsMoreSoThatWeCanCaterYourExperience = "Tell us more so that we can cater your experience";
+  static const howManyEmployeesDoYouHave = "How many employees do you have?";
+  static const whichAccountingSoftwareDoYouUse = "Which accounting software do you use?";
+  static const doYouHaveAnyAccountant = "Do you have any accountant?";
+  static const yes = "Yes";
+  static const no = "No";
+  static const howWillYouUseDrocr = "How will you use drocr";
+  static const letsGetStarted = "Let's get started";
+  static const explore = "Explore";
+  static const getStartedWithYourFreeTrail = "ExploGet started with your free trailre";
+  // static const tellUsMoreSoThatWeCanCaterYourExperience = "Tell us more so that we can cater your experience";
+
+
 
 
 }

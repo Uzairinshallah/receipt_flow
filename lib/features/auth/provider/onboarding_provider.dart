@@ -10,7 +10,12 @@ class OnboardingProvider with ChangeNotifier, EasyLoadingMixin {
   int groupValue = 0;
 
   String? selectedDrocr;
-
+  final drcorList = [
+    "Expense Management",
+    "Culture and store receipts",
+    "Accounting and bookkeeping",
+    "Other"
+  ];
 
   void onPageChanged(int page) {
     pageController.jumpToPage(page);
@@ -30,6 +35,12 @@ class OnboardingProvider with ChangeNotifier, EasyLoadingMixin {
     notifyListeners();
   }
 
+
+  void setDrocr(String val) {
+    selectedDrocr = val;
+    notifyListeners();
+  }
+
   void navToNextPage() {
     final currentPage = pageController.page?.toInt() ?? 0;
     final nextPage = currentPage + 1;
@@ -40,7 +51,10 @@ class OnboardingProvider with ChangeNotifier, EasyLoadingMixin {
   String? selectedSoftware;
   bool? haveAccountant;
 
-
+  void setSoftware(String val) {
+    selectedSoftware = val;
+    notifyListeners();
+  }
 
 
   EmployeeCountEnum? selectedEmployeeCount;

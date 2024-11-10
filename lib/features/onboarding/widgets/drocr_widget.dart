@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:receipt_flow/core/util/app_strings.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_text.dart';
 import '../../../core/util/app_colors.dart';
 import '../../../core/util/utils.dart';
@@ -11,12 +12,7 @@ import 'continue_button_widget.dart';
 class DrocrWidget extends StatelessWidget {
   DrocrWidget({super.key});
 
-  final drcorList = [
-    "Expense Management",
-    "Culture and store receipts",
-    "Accounting and bookkeeping",
-    "Other"
-  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +27,19 @@ class DrocrWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                text: "How will you use drocr",
+                text: LocaleKeys.howWillYouUseDrocr,
                 size: 30.w,
                 fontWeight: FontWeight.w600,
               ),
               30.verticalSpace,
               CustomText(
-                text: "Tell us more so that we can cater your experience",
+                text: LocaleKeys.tellUsMoreSoThatWeCanCaterYourExperience,
                 size: 16.w,
                 textAlign: TextAlign.center,
               ),
               40.verticalSpace,
               CustomText(
-                text: "How many employees do you have?",
+                text: LocaleKeys.howManyEmployeesDoYouHave,
                 textAlign: TextAlign.center,
                 size: 16.w,
               ),
@@ -58,9 +54,17 @@ class DrocrWidget extends StatelessWidget {
                     mainAxisSpacing: 10,
                     childAspectRatio: 1,
                   ),
-                  itemCount: drcorList.length,
+                  itemCount: provider.drcorList.length,
                   itemBuilder: (context, index) {
-                    return ContainerIconWidget(title: drcorList[index],);
+                    return Theme(
+                      data: Utils.getSplash(context),
+                      child: InkWell(
+                        onTap: () {
+                          provider.setDrocr(provider.drcorList[index]);
+                        },
+                      child: ContainerIconWidget(title: provider.drcorList[index],
+                      isSelected: (provider.selectedDrocr == provider.drcorList[index]) ? true : false,)),
+                    );
                   },
                 ),
               )

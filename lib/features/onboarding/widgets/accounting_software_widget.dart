@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:receipt_flow/core/util/app_strings.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_text.dart';
 import '../../../core/util/utils.dart';
 import '../../auth/provider/onboarding_provider.dart';
@@ -29,7 +30,7 @@ class AccountingSoftwareWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
-                  text: "Which accounting software do you use?",
+                  text: LocaleKeys.whichAccountingSoftwareDoYouUse,
                   size: 30.w,
                   fontWeight: FontWeight.w600,
                 ),
@@ -47,19 +48,23 @@ class AccountingSoftwareWidget extends StatelessWidget {
                     ),
                     itemCount: softwareList.length,
                     itemBuilder: (context, index) {
-                      return ContainerIconWidget(title: softwareList[index],);
+                      return InkWell(
+                        onTap: () {
+                          provider.setSoftware(softwareList[index]);
+                        },
+                          child: ContainerIconWidget(title: softwareList[index], isSelected: (provider.selectedSoftware == softwareList[index]) ? true : false,));
                     },
                   ),
                 ),
                 10.verticalSpace,
                 CustomText(
-                  text: "Do you have any accountant?",
+                  text: LocaleKeys.doYouHaveAnyAccountant,
                   size: 16.w,
                   fontWeight: FontWeight.w700,
                 ),
                 10.verticalSpace,
                 _myRadioButton(
-                  title: "Yes",
+                  title: LocaleKeys.yes,
                   value: 0,
                   onChanged: (newValue) {
                       if(newValue != null){
@@ -69,7 +74,7 @@ class AccountingSoftwareWidget extends StatelessWidget {
                   provider: provider,
                 ),
                 _myRadioButton(
-                  title: "No",
+                  title: LocaleKeys.no,
                   value: 1,
                   onChanged: (newValue) {
                     if(newValue != null){

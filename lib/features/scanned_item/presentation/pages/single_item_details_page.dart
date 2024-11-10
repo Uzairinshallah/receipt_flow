@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:receipt_flow/core/util/app_strings.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_button.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_png_image.dart';
 
@@ -7,12 +8,14 @@ import '../../../../core/util/app_colors.dart';
 import '../../../../core/util/app_images.dart';
 import '../../../../core/util/utils.dart';
 import '../../../custom_widgets/custom_text.dart';
+import '../../../model/receipt_model.dart';
 import '../widgets/data_tab_widget.dart';
 import '../widgets/image_tab_widget.dart';
 import '../widgets/item_tab_widget.dart';
 
 class SingleItemDetailsPage extends StatefulWidget {
-  SingleItemDetailsPage({super.key});
+  ReceiptModel receiptModel;
+  SingleItemDetailsPage({super.key, required this.receiptModel,});
 
   @override
   _SingleItemDetailsPageState createState() => _SingleItemDetailsPageState();
@@ -58,23 +61,28 @@ class _SingleItemDetailsPageState extends State<SingleItemDetailsPage>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.arrow_back_ios,
-                      size: 25.h,
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        size: 25.h,
+                      ),
                     ),
                     Expanded(
                       child: Row(
                         children: [
-                        const CustomText(text: "Walmart", textDecoration: TextDecoration.underline,),
+                          CustomText(text: "${LocaleKeys.ocrType}: ${widget.receiptModel.receipt?.ocrType?.toUpperCase()}", textDecoration: TextDecoration.underline,),
                         10.horizontalSpace,
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
-                          decoration: BoxDecoration(
-                          color: AppColors.greyBg.withOpacity(.5),
-                          borderRadius: BorderRadius.circular(40.r),
-                        ),
-                          child: const CustomText(text: "Category", color: AppColors.whiteColor, fontWeight: FontWeight.w600,),
-                        ),
+                        // Container(
+                        //   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+                        //   decoration: BoxDecoration(
+                        //   color: AppColors.greyBg.withOpacity(.5),
+                        //   borderRadius: BorderRadius.circular(40.r),
+                        // ),
+                        //   child: const CustomText(text: "Category", color: AppColors.whiteColor, fontWeight: FontWeight.w600,),
+                        // ),
 
                       ],),
                     ),
@@ -105,8 +113,9 @@ class _SingleItemDetailsPageState extends State<SingleItemDetailsPage>
               child: TabBarView(
                 controller: _tabController,
                 children: [
-                  DataTabWidget(),
-                  const ImageTabWidget(),
+                  ImageTabWidget(imageUrl: widget.receiptModel.receipt?.imageUrl,),
+                  // ImageTabWidget(imageUrl:"https://ydqicdwpowfmojhkopun.supabase.co/storage/v1/object/public/receipts/testing/1731188236667_90zj22pcgm791.jpg"),
+                  DataTabWidget(receiptModel: widget.receiptModel,),
                   const ItemTabWidget(),
                   const Tab(text: ''),
                 ],

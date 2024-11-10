@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:receipt_flow/core/util/app_strings.dart';
 import 'package:receipt_flow/features/auth/provider/onboarding_provider.dart';
 import 'package:receipt_flow/features/custom_widgets/custom_text.dart';
 import '../../../core/util/utils.dart';
@@ -23,7 +24,7 @@ class LetsGetStarted extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomText(
-                text: "Let's get started",
+                text: LocaleKeys.letsGetStarted,
                 size: 30.w,
                 fontWeight: FontWeight.w600,
               ),
