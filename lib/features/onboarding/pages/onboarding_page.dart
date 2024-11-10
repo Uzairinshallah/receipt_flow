@@ -42,6 +42,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
       child: Consumer<OnboardingProvider>(
         builder: (context, provider, child) {
           return Scaffold(
+            backgroundColor: Colors.white,
             body: Padding(
               padding: EdgeInsets.symmetric(
                   horizontal: Utils.horizontalPadding(), vertical: 50.h),
